@@ -26,21 +26,12 @@ jobs:
         run: |
           pipenv run pytest
 
-name: black-action
-on: [push, pull_request]
-jobs:
-  linter_name:
-    name: runner / black
+ format:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Check files using the black formatter
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Format code using Black (check only)
         uses: rickstaa/action-black@v1
-        id: action_black
         with:
-          black_args: "."
-      - name: Annotate diff changes using reviewdog
-        if: steps.action_black.outputs.is_formatted == 'true'
-        uses: reviewdog/action-suggester@v1
-        with:
-          tool_name: blackfmt
+          black_args: ". --check"
