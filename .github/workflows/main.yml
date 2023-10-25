@@ -26,8 +26,8 @@ jobs:
         run: |
           pipenv run pytest
 
-# name: black-action
-# on: [push, pull_request]
+name: black-action
+on: [push, pull_request]
 jobs:
   linter_name:
     name: runner / black formatter
